@@ -1,0 +1,42 @@
+0 0 0 1 0 0 0 1 0 0 0 1 1 1 1 0 
+0.25
+13.75
+23.2
+building time: 4.2e-05
+solving time: 0.00014
+
+0 0 1 1 0 0 0 1 1 0 0 0 1 1 0 0 
+0.25
+12
+21.4359
+building time: 3.4e-05
+solving time: 0.000113
+
+0 0 1 1 0 0 0 1 1 0 0 1 1 1 1 0 
+0.25
+9.26973
+15.9947
+building time: 3.3e-05
+solving time: 0.000109
+
+0 0 1 1 0 0 1 1 1 1 0 0 1 1 0 0 
+0.25
+6
+10
+building time: 3.3e-05
+solving time: 9.9e-05
+
+0 0 1 1 0 0 1 1 1 1 0 1 1 1 1 0 
+0.25
+6.39773
+10.6628
+building time: 3.4e-05
+solving time: 0.000108
+
+0 1 1 1 1 0 1 1 1 1 0 1 1 1 1 0 
+0.25
+5.5
+9
+building time: 3.3e-05
+solving time: 8.3e-05
+
