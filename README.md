@@ -5,7 +5,7 @@ This code contains various python and bash files to generate the data and the fi
 The 'fixating' file has to be compiled based on <a href="https://github.com/hindersin/efficientFixation/blob/master/README.md"><b>Exact numerical calculation of fixation probability and time on graphs.</b></a> to use most of the code properly.
 Furthermore, geng from the <a href="http://pallini.di.uniroma1.it/"><b>nauty and tracer suite</b></a> is required to generate all graphs of a certain size efficiently.
 
-##Description of files
+## Description of files
 
 'create_graph.py' generates a figure for a single specific graph.<br>
 'geneticalgo_local.py' runs the genetic algorithm as described in the paper.<br>
@@ -15,7 +15,8 @@ Furthermore, geng from the <a href="http://pallini.di.uniroma1.it/"><b>nauty and
 'transitionsplotting.py' generates the figures to compare the fixation probability against time for different sizes, updating mechanisms etc. .<br>
 The other python files are simply helping functions for these main files.
 
-##Usage
+## Usage
+
 The main python files can directly be run as long as the dependencies have been downloaded. If you should want to change something, you need to do so inside the file, but most lines are commented.
 
 ## License
