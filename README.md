@@ -7,12 +7,12 @@ Furthermore, geng from the <a href="http://pallini.di.uniroma1.it/"><b>nauty and
 
 ##Description of files
 
-'create_graph.py' generates a figure for a single specific graph.
-'geneticalgo_local.py' runs the genetic algorithm as described in the paper.
-'heat_bsize_plot.py' generates the figures with the heat heterogeneity for the bigger sizes where it is not possible anymore to look at all graphs.
-'heat_full_plot.py' generates the figures with the heat heterogeneity for the smaller sizes where it is possible to look at all graphs.
-'rvsphi.py' generates the figures to compare the fitness against the fixation probability for certain graphs, like the detour graph and the l-graph.
-'transitionsplotting.py' generates the figures to compare the fixation probability against time for different sizes, updating mechanisms etc. .
+'create_graph.py' generates a figure for a single specific graph.<br>
+'geneticalgo_local.py' runs the genetic algorithm as described in the paper.<br>
+'heat_bsize_plot.py' generates the figures with the heat heterogeneity for the bigger sizes where it is not possible anymore to look at all graphs.<br>
+'heat_full_plot.py' generates the figures with the heat heterogeneity for the smaller sizes where it is possible to look at all graphs.<br>
+'rvsphi.py' generates the figures to compare the fitness against the fixation probability for certain graphs, like the detour graph and the l-graph.<br>
+'transitionsplotting.py' generates the figures to compare the fixation probability against time for different sizes, updating mechanisms etc. .<br>
 The other python files are simply helping functions for these main files.
 
 ##Usage
