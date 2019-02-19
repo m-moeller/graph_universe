@@ -13,20 +13,20 @@ from matplotlib.backends.backend_pdf import PdfPages
 from collections import OrderedDict
 #generates heat heterogeneity vs fixation probability plot for a fixed degree distribution and size
 #sizes are all the population sizes we want to look at
-sizes = range(15,16)
+sizes = range(10,11)
 
 #r = 1.25
 #n is the number of graphs generated for the degree distribution
 n = 100
 #m is the number of different degree distributions that are tried; only relevant to make the correlation more reliable, not relevant for plotting
-m = 1
+m = 10
 
 for size in sizes:
-
+        corr = np.zeros(10)
         c=0
         while c!=m:  
                 #rand_degree_init initializes a random degree distribution based on the Erdos-Renyi algorithm, with a given p
-                degree1 = rdi.rand_degree_init(size,0.5)
+                degree1 = rdi.rand_degree_init(size,0.8)
                 degree = degree1.tolist()[0]
 
                 #probs, times, heat, admats are the fixation probability and time as well as the square root of the heat heterogeneity and the adjacency matrix, respectively
@@ -78,38 +78,39 @@ for size in sizes:
                         h = 0
                 
                 #throw out all duplicate graphs, only relevant for correlation
-                #admatsnew = np.zeros([n,3,size,size],dtype=int)
-                #probsnew = np.zeros([n,3],dtype=float)
-                #heatnew = np.zeros([n,3],dtype=float)
+                admatsnew = np.zeros([n,4,size,size],dtype=int)
+                probsnew = np.zeros([n,4],dtype=float)
+                heatnew = np.zeros([n,4],dtype=float)
                 #l counts the number of unique graphs
-                #l = np.zeros(3,dtype=int)
+                l = 0
                 #for x in range(0,3):
-                #    for i in range(0,n):
-                #        duplicate=0
-                #        for j in range(0,n):
-                #                g1 = igraph.Graph.Adjacency(admats[i][x].tolist())
-                #                g2 = igraph.Graph.Adjacency(admatsnew[j][x].tolist())
+                for i in range(0,n):
+                        duplicate=0
+                        for j in range(0,n):
+                                g1 = igraph.Graph.Adjacency(admats[i][1].tolist())
+                                g2 = igraph.Graph.Adjacency(admatsnew[j][1].tolist())
                 
-                #                if g1.isomorphic(g2):
-                #                        duplicate=1
-                #        if duplicate==0:
-                #                admatsnew[l[x]][x] = admats[i][x]
-                #                probsnew[l[x]][x] = probs[i][x]
-                #                heatnew[l[x]][x] = heat[i][x]
-                #                l[x] = l[x]+1
-                    #admatsnew2 = admatsnew[1:l]
-                    #probsnew2 = probsnew[1:l]
-                    #heatnew2 = heatnew[1:l]
-                #print l
+                                if g1.isomorphic(g2):
+                                        duplicate=1
+                        if duplicate==0:
+                                admatsnew[l] = admats[i]
+                                probsnew[l] = probs[i]
+                                heatnew[l] = heat[i]
+                                l = l+1
+                admatsnew2 = admatsnew[1:l]
+                probsnew2 = probsnew[1:l]
+                heatnew2 = heatnew[1:l]
+                print l
                 #print probs[:,0],probs[:,1],probs[:,2]
                 #plot everything
                 #plt.plot(heat[:,1],probs[:,1],'bo')
                 #plt.plot(heat[:,2],probs[:,2],'go')
-                #if min(l)>10:
-                #corr[c] = np.corrcoef(probsnew2[:],heatnew2[:])[0,1]
+                if l>10:
+                    corr[c] = np.corrcoef(probsnew2[:,1],heatnew2[:,1])[0,1]
                         
-                c = c+1
-                
+                    c = c+1
+                print c
+                print corr
                 #change font size of plot
                 plt.rcParams.update({'font.size': 22})
                 #initialize plot
@@ -195,6 +196,6 @@ for size in sizes:
                 #save and close figures
                 plt.savefig('heterogeneity_r_11_size' + str(size) + '.png',bbox_inches='tight')
                 plt.clf()
-        #corrtotal = sum(corr)/m
+        corrtotal = sum(corr)/m
         #print corr
-        #print corrtotal
+        print corrtotal

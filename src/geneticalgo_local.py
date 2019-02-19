@@ -8,8 +8,6 @@ import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 from matplotlib.backends.backend_pdf import PdfPages
 
-#Runs the genetic algorithm locally; Most values can be changed at the top, only if you want to change the direction into which the algorithm optimizes, you need to change what the 'fit' value is based on inside the code
-
 #import fileinput
 #import cProfile
 
@@ -42,35 +40,35 @@ numberALL = (1, 1, 1, 2, 6, 21, 112, 853, 11117, 261080,11716571)
 number = numberALL[size]
 
 #The part commented out here is in case you want to plot the path of the graphs chosen by the algorithm
-#e = open('../data/fixation_size_' + str(size) + '_fitness_125_Bd_full.txt','r')
-#lines = e.readlines()
+e = open('../data/fixation_size_' + str(size) + '_fitness_125_Bd_full.txt','r')
+lines = e.readlines()
 
-#times = np.zeros(number, dtype=float)
-#probs = np.zeros(number, dtype=float)
+times = np.zeros(number, dtype=float)
+probs = np.zeros(number, dtype=float)
 
-#outputfully = rf.runfixating('Bd',str(size),'undirected',str(r),'ER','GNP','1')
-#fullyprob = outputfully[1]
-#fullytime = outputfully[3]
+outputfully = rf.runfixating('Bd',str(size),'undirected',str(r),'ER','GNP','1')
+fullyprob = outputfully[1]
+fullytime = outputfully[3]
 
-#plt.plot([0,1],[fullytime,fullytime],'k--',label='well-mixed',alpha=1)
-#plt.plot([fullyprob,fullyprob],[0,2000],'k--',label='well-mixed2',alpha=1)    
+plt.plot([0,1],[fullytime,fullytime],'k--',label='well-mixed',alpha=1)
+plt.plot([fullyprob,fullyprob],[0,2000],'k--',label='well-mixed2',alpha=1)    
     
-#for i in range(0,number):
-#                timeLine = lines[7*i+3]
-#                times[i] = float(timeLine)
-#                probLine = lines[7*i+1]
-#                probs[i] = float(probLine)
-#plt.plot(probs,times,'o', color = '0.5')
+for i in range(0,number):
+                timeLine = lines[7*i+3]
+                times[i] = float(timeLine)
+                probLine = lines[7*i+1]
+                probs[i] = float(probLine)
+plt.plot(probs,times,'o', color = '0.5')
     
-#ax = plt.gca()
-#ax.xaxis.set_tick_params(width=2)
-#ax.xaxis.set_tick_params(length=10)
-#ax.yaxis.set_tick_params(width=2)
-#ax.yaxis.set_tick_params(length=10)
-#ax.tick_params(axis='x', pad=30)
+ax = plt.gca()
+ax.xaxis.set_tick_params(width=2)
+ax.xaxis.set_tick_params(length=10)
+ax.yaxis.set_tick_params(width=2)
+ax.yaxis.set_tick_params(length=10)
+ax.tick_params(axis='x', pad=30)
     
-#plt.xlim([0.14,0.36])
-#plt.ylim([-20,320])
+plt.xlim([0.14,0.36])
+plt.ylim([-20,320])
 
 #Initialize value for checking whether graphs are fully connected
 h=0
@@ -85,6 +83,8 @@ if 1:
             #convert that number to binary so you get a string of length b
             temp += bin(randind)[2:]
         #transform the string into a matrix
+        print temp
+        print tfm.transformtomatrix(temp,size)
         (tempmat,a) = tfm.transformtomatrix(temp,size)
         #convert the matrix into a format that is readable for igraph
         g = igraph.Graph.Adjacency(tempmat.tolist())
@@ -123,7 +123,7 @@ if 1:
     #cross chooses the partners for crossover
     cross = np.zeros([2,n],dtype=int)
     #main loop for the evolution
-    #plot1 = plt.figure(1, figsize=(10.0,10.0))
+    plot1 = plt.figure(1, figsize=(10.0,10.0))
     for j in range(0,m):
         #inner  loop for fitness calculation
         for i in range(0,n):
@@ -135,12 +135,12 @@ if 1:
             #calculate fitness; if the graph isn't connected, the fitness is set to the lowest possible value 0(this shouldn't happen, but it's there as a failsafe)
             if g.vertex_disjoint_paths() == 0:
                 fit = 0
-            #if you want to change the direction to which the genetic algorithm optimizes, you need to change the fit value, for example you can make it based on the time instead of the probalitiy
+            #print rfmat
             else:
                 output = rf.runfixating('Bd',str(size),'directed',str(r),'custom',rfmat,'0')
-                prob = float(output[1])
+                fitnorm = float(output[1])
                 time[i] = float(output[3])
-                fit[i] = prob
+                fit[i] = fitnorm
             
             #send the individual to one of the threads
         #    comm.send(indnorm, dest=i+1)
@@ -153,7 +153,8 @@ if 1:
         #print 'fit', fit
         #x is the array of the fittest individuals
         x = ind[np.argsort(fit)][:top]
-        #plt.plot(fit[np.argsort(fit)][:top],time[np.argsort(fit)][:top],'bo')
+        plt.plot(fit[np.argsort(fit)],time[np.argsort(fit)],'co',alpha=0.7)
+        plt.plot(fit[np.argsort(fit)][:top],time[np.argsort(fit)][:top],'co')
         #chooses the first partner for crossover
         cross[0]= np.random.randint(top,size =n)
         #chooses the second partner for crossover
@@ -190,7 +191,7 @@ if 1:
     print(fit[np.argsort(fit)][:top])
     print(x)
 
-    #plt.savefig('genalgo_path' + str(size) + 'r' + str(r) + '.png',dpi=600)
+    plt.savefig('genalgo_path' + str(size) + 'r' + str(r) + '.png',dpi=600)
 
 #all the other threads only calculate the fitness of one individual
 #if rank != 0:
