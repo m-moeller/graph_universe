@@ -1,9 +1,9 @@
 # graph_universe
-This code contains various python and bash files to generate the data and the figures in <a href="https://arxiv.org/abs/1810.12807"><b>Exploring and mapping the universe of evolutionary graphs</b></a> by <i>Laura Hindersin, Marius Möller</i> and <i> Arne Traulsen</i>.
+This code contains various python and bash files to generate the data and the figures in <a href="https://arxiv.org/abs/1810.12807"><b>"Exploring and mapping the universe of evolutionary graphs"</b></a> by <i>Marius Möller, Laura Hindersin</i> and <i> Arne Traulsen</i>.
 
 ## Dependencies
-The 'fixating' file has to be compiled based on <a href="https://github.com/hindersin/efficientFixation/blob/master/README.md"><b>Exact numerical calculation of fixation probability and time on graphs.</b></a> to use most of the code properly.
-Furthermore, geng from the <a href="http://pallini.di.uniroma1.it/"><b>nauty and tracer suite</b></a> is required to generate all graphs of a certain size efficiently.
+The 'fixating' file has to be compiled based on <a href="https://github.com/hindersin/efficientFixation/blob/master/README.md"><b>Exact numerical calculation of fixation probability and time on graphs.</b></a> by <i>Laura Hindersin, Marius Möller, Arne Traulsen</i> and <i>Benedikt Bauer</i> to use most of the code properly.
+Furthermore, the software "geng" from the <a href="http://pallini.di.uniroma1.it/"><b>"nauty and tracer suite"</b></a> is required to generate all graphs of a certain size efficiently.
 
 ## Description of files
 
